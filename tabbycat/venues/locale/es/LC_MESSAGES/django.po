@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-07-21 12:20\n"
+"POT-Creation-Date: 2019-11-04 13:37-0500\n"
+"PO-Revision-Date: 2019-11-21 04:32\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -29,110 +29,104 @@ msgid "Draw is not confirmed, confirm draw to assign venues."
 msgstr ""
 
 #: venues/consumers.py:28
-msgid "Succesfully auto-allocated venues to debates."
+msgid "Successfully auto-allocated venues to debates."
 msgstr ""
 
-#: venues/models.py:10 venues/models.py:74
+#: venues/models.py:9 venues/models.py:65
 msgid "name"
 msgstr "nombre"
 
-#: venues/models.py:12 venues/models.py:128
+#: venues/models.py:11 venues/models.py:117
 msgid "priority"
 msgstr "prioridad"
 
-#: venues/models.py:13
+#: venues/models.py:12
 msgid "Venues with a higher priority number will be preferred when allocating venues to debates"
 msgstr "Las salas con un mayor número de prioridad serán priorizadas cuando se asignen las salas de debate"
 
-#: venues/models.py:16
+#: venues/models.py:15
 msgid "tournament"
 msgstr "torneo"
 
-#: venues/models.py:17
+#: venues/models.py:16
 msgid "Venues not assigned to any tournament can be shared between tournaments"
 msgstr "Las salas que no estén asignadas a ningún torneo pueden ser compartidas entre torneos"
 
-#: venues/models.py:24
+#: venues/models.py:23
 msgid "venue"
 msgstr "sala"
 
-#: venues/models.py:25 venues/models.py:84
+#: venues/models.py:24 venues/models.py:75
 msgid "venues"
 msgstr "salas"
 
-#: venues/models.py:69
+#: venues/models.py:60
 msgid "Don't display in venue name"
 msgstr "No mostrarlo en el nombre de la sala"
 
-#: venues/models.py:70
+#: venues/models.py:61
 msgid "Display as prefix"
 msgstr "Mostrar como prefijo"
 
-#: venues/models.py:71
+#: venues/models.py:62
 msgid "Display as suffix"
 msgstr "Mostrar como sufijo"
 
-#: venues/models.py:75
+#: venues/models.py:66
 msgid "Name of category, e.g., \"Purple\", \"Step-free access\", \"Close to tab room\". This name is shown when the category is prefixed or suffixed to a venue name in the draw, e.g., \"Purple – G05\"."
 msgstr "Nombre de la categoría, ej: \"Morado\", \"Acceso sin escaleras\", \"Cerca a tabulación\". Este nombre se muestra cuando la categoría se muestra como prefijo o sufijo del nombre de la sala en el cuadro, ej: \"Morado – G05\"."
 
-#: venues/models.py:79
+#: venues/models.py:70
 msgid "description"
 msgstr "descripción"
 
-#: venues/models.py:80
+#: venues/models.py:71
 msgid "Description, as the predicate of a sentence, e.g. \"has step-free access\", \"is close to the briefing hall\". This description follows \"This venue\" when shown in tooltips, e.g., \"This venue is close to the briefing hall.\"."
 msgstr "Descripción, como el predicado de una oración, ej: \"tiene acceso sin escaleras\", \"está cerca de la sala de anuncios\". La descripción le sigue a \"Esta sala\" cuando se muestra en tooltips, ej: \"Esta sala está cerca de la sala de anuncios\"."
 
-#: venues/models.py:88
+#: venues/models.py:79
 msgid "display in venue name"
 msgstr "mostrar en el nombre de la sala"
 
-#: venues/models.py:89
+#: venues/models.py:80
 msgid "Prefix: \"Purple – G05\", Suffix: \"G05 – Purple\""
 msgstr "Prefijo: \"Morado – G05\", Sufijo: \"G05 – Morado\""
 
-#: venues/models.py:91
+#: venues/models.py:82
 msgid "display in public tooltip"
 msgstr "mostrar en el tooltip público"
 
-#: venues/models.py:92
+#: venues/models.py:83
 msgid "Displays the description in the tooltip for the venue on public pages. The description, if not blank, will always show on admin pages."
 msgstr "Muestra la descripción en el tooltip para la sala en las páginas públicas. La descripción, si no está en blanco, siempre se mostrará en las paginas de admin."
 
-#: venues/models.py:96
+#: venues/models.py:87
 msgid "venue category"
 msgstr "categoría de sala"
 
-#: venues/models.py:97
+#: venues/models.py:88
 msgid "venue categories"
 msgstr "categorías de sala"
 
-#: venues/models.py:127
+#: venues/models.py:116
 msgid "category"
 msgstr "categoría"
 
-#: venues/models.py:131
+#: venues/models.py:120
 msgid "subject content type"
 msgstr "Tipo de contenido del elemento"
 
-#: venues/models.py:134
+#: venues/models.py:123
 msgid "subject ID"
 msgstr "ID del elemento"
 
-#: venues/models.py:140
+#: venues/models.py:129
 msgid "venue constraint"
 msgstr "limitación de sala"
 
-#: venues/models.py:141
+#: venues/models.py:130
 msgid "venue constraints"
 msgstr "limitaciones de sala"
-
-#: venues/templates/legacy_edit_venues.html:5
-#: venues/templates/legacy_edit_venues.html:10
-#, python-format
-msgid "Edit Venues for %(round_abbr)s"
-msgstr ""
 
 #: venues/templates/venue_categories_edit.html:4
 #: venues/templates/venue_categories_edit.html:5
@@ -185,42 +179,37 @@ msgstr "Se cumplen las limitaciones de sala de %(team)s (%(category)s, vía la i
 msgid "Venue does not meet any constraint of institution %(institution)s (%(team)s)"
 msgstr "La sala no cumple con ninguna de las limitaciones de la institución %(institution)s (%(team)s)"
 
-#: venues/views.py:31
+#: venues/views.py:27
 msgid "Edit Venues"
 msgstr ""
 
-#: venues/views.py:138
+#: venues/views.py:72
 #, python-format
 msgid "Saved venue category: %(list)s"
 msgid_plural "Saved venue categories: %(list)s"
 msgstr[0] "Categoría de sala guardada: %(list)s"
 msgstr[1] "Categorías de sala guardadas: %(list)s"
 
-#: venues/views.py:144
+#: venues/views.py:78
 msgid "No changes were made to the venue categories."
 msgstr "No se realizaron cambios a las categorías de sala."
 
-#: venues/views.py:196
+#: venues/views.py:127
 #, python-format
 msgid "%s (Adjudicator)"
 msgstr "%s(Juez)"
 
-#: venues/views.py:199
+#: venues/views.py:130
 #, python-format
 msgid "%s (Team)"
 msgstr "%s(Equipo)"
 
-#: venues/views.py:202
+#: venues/views.py:133
 #, python-format
 msgid "%s (Institution)"
 msgstr "%s(Institución)"
 
-#: venues/views.py:205
-#, python-format
-msgid "%s (Division)"
-msgstr "%s(División)"
-
-#: venues/views.py:213
+#: venues/views.py:141
 #, python-format
 msgid "Saved %(count)d venue constraint."
 msgid_plural "Saved %(count)d venue constraints."
