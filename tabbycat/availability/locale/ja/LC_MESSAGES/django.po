@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-09-07 08:36\n"
+"POT-Creation-Date: 2019-11-04 13:37-0500\n"
+"PO-Revision-Date: 2019-11-21 04:30\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -138,6 +138,11 @@ msgstr ""
 msgid "There's only one team breaking in the %(break_category)s Break. You can't generate an elimination round draw with only one team — you might like to <a href=\"%(breakqual_teams_url)s\" class=\"alert-link\"> review the break for the %(break_category)s Break</a>."
 msgstr ""
 
+#: availability/templates/availability_index.html:199
+#, python-format
+msgid "The team standings precedence is empty. This means that teams aren't ranked according to any metrics, so all teams will be in a single bracket containing everyone. If this isn't what you intended, set the team standings precedence in the <a href=\"%(standings_config_url)s\" class=\"alert-link\">Standings section of this tournament's configuration</a> before creating the draw. In most tournaments, the first metric should be points or wins."
+msgstr ""
+
 #: availability/templates/base_availability.html:38
 msgid "Select All"
 msgstr ""
@@ -263,40 +268,40 @@ msgid "The following %(count)s venue, which was available last round, is not ava
 msgid_plural "The following %(count)s venues, which were available last round, are not available this round: %(venues_list)s"
 msgstr[0] ""
 
-#: availability/templates/checkin_progress.html:161
-msgid "Mark venues as available"
-msgstr ""
-
-#. Translators: required_count is a word for a number (e.g. "two", "three", etc.)
-#: availability/templates/checkin_progress.html:164
-#, python-format
-msgid "There needs to be at least one venue marked as available, given the number of debates."
-msgid_plural "There need to be at least %(required_count)s venues marked as available, given the number of debates."
-msgstr[0] ""
-
-#: availability/templates/checkin_progress.html:176
-msgid "Edit venue availability"
-msgstr ""
-
-#: availability/templates/checkin_progress.html:180
+#: availability/templates/checkin_progress.html:162
 #, python-format
 msgid "One venue does not have an associated tournament. Set its 'Tournament' field in the Edit Database area if you want it to be marked as available."
 msgid_plural "%(count)s venues do not have an associated tournament. Set their 'Tournament' field in the Edit Database area if you want them to be marked as available."
 msgstr[0] ""
 
-#: availability/views.py:101
+#: availability/templates/checkin_progress.html:170
+msgid "Mark venues as available"
+msgstr ""
+
+#. Translators: required_count is a word for a number (e.g. "two", "three", etc.)
+#: availability/templates/checkin_progress.html:173
+#, python-format
+msgid "There needs to be at least one venue marked as available, given the number of debates."
+msgid_plural "There need to be at least %(required_count)s venues marked as available, given the number of debates."
+msgstr[0] ""
+
+#: availability/templates/checkin_progress.html:185
+msgid "Edit venue availability"
+msgstr ""
+
+#: availability/views.py:95
 msgid "no teams are debating"
 msgstr ""
 
 #. Translators: nteams in this string can only be 0 or 1
-#: availability/views.py:111
+#: availability/views.py:105
 #, python-format
 msgid "%(nteams)d breaking team — no debates can happen"
 msgid_plural "%(nteams)d breaking teams — no debates can happen"
 msgstr[0] ""
 
 #. Translators: ndebating in this string is always at least 2
-#: availability/views.py:119
+#: availability/views.py:113
 #, python-format
 msgid "%(ndebating)d breaking team is debating this round"
 msgid_plural "%(ndebating)d breaking teams are debating this round"
@@ -305,73 +310,73 @@ msgstr[0] ""
 #. Translators: This gets appended to the previous string (the one with
 #. ndebating in it) if (and only if) nbypassing is greater than 0.
 #. "It" refers to this round.
-#: availability/views.py:127
+#: availability/views.py:121
 #, python-format
 msgid "; %(nbypassing)d team is bypassing it"
 msgid_plural "; %(nbypassing)d teams are bypassing it"
 msgstr[0] ""
 
 #. Translators: nadvancing in this string is always at least 2
-#: availability/views.py:146
+#: availability/views.py:140
 #, python-format
 msgid "%(nadvancing)s advancing team is debating this round"
 msgid_plural "%(nadvancing)s advancing teams are debating this round"
 msgstr[0] ""
 
-#: availability/views.py:190
+#: availability/views.py:180
 msgid "Active Now"
 msgstr ""
 
-#: availability/views.py:201
+#: availability/views.py:191
 #, python-format
 msgid "Active in %(prev_round)s"
 msgstr ""
 
-#: availability/views.py:207
+#: availability/views.py:197
 msgid "Checked-In"
 msgstr ""
 
-#: availability/views.py:218
+#: availability/views.py:208
 msgid "Team Availability"
 msgstr ""
 
-#: availability/views.py:237
+#: availability/views.py:227
 msgid "Adjudicator Availability"
 msgstr ""
 
-#: availability/views.py:257
+#: availability/views.py:246
 msgid "Venue Availability"
 msgstr ""
 
-#: availability/views.py:272
+#: availability/views.py:260
 msgid "Venue"
 msgstr "ラウンド部屋"
 
-#: availability/views.py:274
+#: availability/views.py:262
 msgid "Display Name (for the draw)"
 msgstr ""
 
-#: availability/views.py:277
+#: availability/views.py:265
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: availability/views.py:278
+#: availability/views.py:266
 msgid "Priority"
 msgstr ""
 
-#: availability/views.py:298
+#: availability/views.py:286
 msgid "Failed to update some or all availabilities due to an integrityerror. You should retry this action or make individual updates."
 msgstr ""
 
-#: availability/views.py:306
+#: availability/views.py:294
 msgid "Checked in all teams, adjudicators and venues."
 msgstr ""
 
-#: availability/views.py:313
+#: availability/views.py:301
 msgid "Checked in all breaking adjudicators."
 msgstr ""
 
-#: availability/views.py:321
+#: availability/views.py:309
 msgid "Checked in all teams, adjudicators and venues from previous round."
 msgstr ""
 

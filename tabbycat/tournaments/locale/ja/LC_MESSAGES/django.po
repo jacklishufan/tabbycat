@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-08-11 12:34\n"
+"POT-Creation-Date: 2019-11-20 23:12-0500\n"
+"PO-Revision-Date: 2019-11-21 04:31\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -95,30 +95,30 @@ msgstr ""
 msgid "If all preliminary rounds have been completed, this field is required."
 msgstr ""
 
-#: tournaments/mixins.py:112
+#: tournaments/mixins.py:111
 #, python-format
 msgid "You've been redirected to this page because tournament %(tournament_name)s has no rounds.Please create some before returning to the admin site"
 msgstr ""
 
-#: tournaments/mixins.py:120
+#: tournaments/mixins.py:119
 #, python-format
 msgid "There's a problem with the data for the tournament %(tournament_name)s. Please contact a tab director and ask them to investigate."
 msgstr ""
 
-#: tournaments/mixins.py:132
+#: tournaments/mixins.py:131
 msgid "You've been redirected to this page because of a problem with how teams are assigned to sides in a debate."
 msgstr "どのようにチームにサイドを振り分けるかの問題があるためこのページへリダイレクトされました。"
 
-#: tournaments/mixins.py:139
+#: tournaments/mixins.py:138
 msgid "There's a problem with how teams are assigned to sides in a debate. The tab director will need to resolve this issue."
 msgstr "サイドの決め方に問題があります。タブディレクターはこの問題を解決する必要があります。"
 
-#: tournaments/mixins.py:234
+#: tournaments/mixins.py:233
 #, python-format
 msgid "for %(round)s"
 msgstr ""
 
-#: tournaments/mixins.py:433
+#: tournaments/mixins.py:432
 msgid "Return to Draw"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "You can't use this as a tournament slug, because it's reserved for a Tabbycat system URL. Please try another one."
 msgstr ""
 
-#: tournaments/models.py:33 tournaments/models.py:331
+#: tournaments/models.py:33 tournaments/models.py:323
 msgid "name"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "The name used in the menu, e.g. \"Australs 2016\""
 msgstr ""
 
-#: tournaments/models.py:39 tournaments/models.py:325
+#: tournaments/models.py:39 tournaments/models.py:317
 msgid "sequence number"
 msgstr ""
 
@@ -162,7 +162,7 @@ msgstr "大会のsub-URLには空白を入れないでください。例:'austra
 msgid "active"
 msgstr ""
 
-#: tournaments/models.py:47 tournaments/models.py:324
+#: tournaments/models.py:47 tournaments/models.py:316
 msgid "tournament"
 msgstr "トーナメント"
 
@@ -171,150 +171,150 @@ msgid "tournaments"
 msgstr ""
 
 #. Translators: These are choices for the type of draw a round should have.
-#: tournaments/models.py:301
+#: tournaments/models.py:293
 msgid "Random"
 msgstr "ランダム"
 
-#: tournaments/models.py:302
+#: tournaments/models.py:294
 msgid "Manual"
 msgstr "手動"
 
-#: tournaments/models.py:303
+#: tournaments/models.py:295
 msgid "Round-robin"
 msgstr "ラウンドロビン方式"
 
-#: tournaments/models.py:304
+#: tournaments/models.py:296
 msgid "Power-paired"
 msgstr "パワーマッチ方式"
 
-#: tournaments/models.py:305 tournaments/models.py:310
+#: tournaments/models.py:297 tournaments/models.py:302
 msgid "Elimination"
 msgstr "ノックアウト方式"
 
-#: tournaments/models.py:309
+#: tournaments/models.py:301
 msgid "Preliminary"
 msgstr "予選"
 
 #. Translators: These are choices for the status of the draw for a round.
-#: tournaments/models.py:317
+#: tournaments/models.py:309
 msgid "None"
 msgstr ""
 
-#: tournaments/models.py:318
+#: tournaments/models.py:310
 msgid "Draft"
 msgstr ""
 
-#: tournaments/models.py:319
+#: tournaments/models.py:311
 msgid "Confirmed"
 msgstr ""
 
-#: tournaments/models.py:320
+#: tournaments/models.py:312
 msgid "Released"
 msgstr ""
 
-#: tournaments/models.py:326
+#: tournaments/models.py:318
 msgid "A number that determines the order of the round, should count consecutively from 1 for the first round"
 msgstr ""
 
-#: tournaments/models.py:328
+#: tournaments/models.py:320
 msgid "completed"
 msgstr ""
 
-#: tournaments/models.py:329
+#: tournaments/models.py:321
 msgid "True if the round is over, which normally means all results have been entered and confirmed"
 msgstr ""
 
-#: tournaments/models.py:331
+#: tournaments/models.py:323
 msgid "e.g. \"Round 1\""
 msgstr "例: ラウンド1"
 
-#: tournaments/models.py:332
+#: tournaments/models.py:324
 msgid "abbreviation"
 msgstr "省略形"
 
-#: tournaments/models.py:332
+#: tournaments/models.py:324
 msgid "e.g. \"R1\""
 msgstr "例: R1"
 
-#: tournaments/models.py:334
+#: tournaments/models.py:326
 msgid "stage"
 msgstr ""
 
-#: tournaments/models.py:335
+#: tournaments/models.py:327
 msgid "Preliminary = inrounds, elimination = outrounds"
 msgstr ""
 
-#: tournaments/models.py:337
+#: tournaments/models.py:329
 msgid "draw type"
 msgstr ""
 
-#: tournaments/models.py:338
+#: tournaments/models.py:330
 msgid "Which draw method to use"
 msgstr ""
 
-#: tournaments/models.py:341
+#: tournaments/models.py:333
 msgid "break category"
 msgstr "ブレイクカテゴリー"
 
-#: tournaments/models.py:342
+#: tournaments/models.py:334
 msgid "If elimination round, which break category"
 msgstr ""
 
-#: tournaments/models.py:345
+#: tournaments/models.py:337
 msgid "draw status"
 msgstr ""
 
-#: tournaments/models.py:346
+#: tournaments/models.py:338
 msgid "The status of this round's draw"
 msgstr "このラウンドの対戦表の状態"
 
-#: tournaments/models.py:349
+#: tournaments/models.py:341
 msgid "feedback weight"
 msgstr "フィードバックの比重"
 
-#: tournaments/models.py:351
+#: tournaments/models.py:343
 #, no-python-format
-msgid "The extent to which each adjudicator's overall score depends on feedback vs their test score. At 0, it is 100% drawn from their test score, at 1 it is 100% drawn from feedback."
+msgid "The extent to which each adjudicator's overall score depends on feedback vs their base score. At 0, it is 100% drawn from their base score, at 1 it is 100% drawn from feedback."
 msgstr ""
 
 #. Translators: A silent round is a round for which results are not disclosed once the round is over.
-#: tournaments/models.py:354
+#: tournaments/models.py:346
 msgid "silent"
 msgstr "サイレントラウンド"
 
-#: tournaments/models.py:355
+#: tournaments/models.py:347
 msgid "If marked silent, information about this round (such as its results) will not be shown publicly."
 msgstr ""
 
-#: tournaments/models.py:357
+#: tournaments/models.py:349
 msgid "motions released"
 msgstr ""
 
-#: tournaments/models.py:358
+#: tournaments/models.py:350
 msgid "Whether motions will appear on the public website, assuming that feature is turned on"
 msgstr ""
 
-#: tournaments/models.py:359
+#: tournaments/models.py:351
 msgid "starts at"
 msgstr "始まる時刻は"
 
-#: tournaments/models.py:362
+#: tournaments/models.py:354
 msgid "round"
 msgstr "ラウンド"
 
-#: tournaments/models.py:363
+#: tournaments/models.py:355
 msgid "rounds"
 msgstr ""
 
-#: tournaments/models.py:376
+#: tournaments/models.py:368
 msgid "A round in the elimination stage must have its draw type set to \"Elimination\"."
 msgstr ""
 
-#: tournaments/models.py:379
+#: tournaments/models.py:371
 msgid "A round in the preliminary stage cannot have its draw type set to \"Elimination\"."
 msgstr ""
 
-#: tournaments/models.py:384
+#: tournaments/models.py:376
 msgid "Elimination rounds must have a break category."
 msgstr ""
 
@@ -396,7 +396,7 @@ msgid "Load %(name)s"
 msgstr ""
 
 #: tournaments/templates/create_tournament.html:49
-msgid "You already have a tournament set up using this data set. Reloading the data will delete <strong>all data</strong> from that tourament."
+msgid "You already have a tournament set up using this data set. Reloading the data will delete <strong>all data</strong> from that tournament."
 msgstr ""
 
 #: tournaments/templates/create_tournament.html:69
@@ -551,12 +551,12 @@ msgid "Motions Tab"
 msgstr "モーションタブ"
 
 #: tournaments/templates/public_tournament_index.html:88
-#: tournaments/templates/public_tournament_index.html:141
+#: tournaments/templates/public_tournament_index.html:135
 msgid "Sides"
 msgstr ""
 
 #: tournaments/templates/public_tournament_index.html:97
-#: tournaments/templates/public_tournament_index.html:207
+#: tournaments/templates/public_tournament_index.html:201
 #, python-format
 msgid "Draw for %(round_name)s"
 msgstr "%(round_name)sのアロケーション"
@@ -583,55 +583,47 @@ msgid "Results"
 msgstr "結果"
 
 #: tournaments/templates/public_tournament_index.html:129
-msgid "Divisions"
-msgstr ""
-
-#: tournaments/templates/public_tournament_index.html:135
 msgid "Motions"
 msgstr "モーション"
 
-#: tournaments/templates/public_tournament_index.html:147
+#: tournaments/templates/public_tournament_index.html:141
 msgid "Team Standings"
 msgstr "チーム順位"
 
-#: tournaments/templates/public_tournament_index.html:154
+#: tournaments/templates/public_tournament_index.html:148
 #, python-format
 msgid "%(category_name)s Break"
 msgstr ""
 
-#: tournaments/templates/public_tournament_index.html:163
+#: tournaments/templates/public_tournament_index.html:157
 msgid "Breaking Adjudicators"
 msgstr ""
 
-#: tournaments/templates/public_tournament_index.html:169
+#: tournaments/templates/public_tournament_index.html:163
 msgid "Diversity"
 msgstr "ダイバーシティ"
 
-#: tournaments/templates/public_tournament_index.html:175
+#: tournaments/templates/public_tournament_index.html:169
 msgid "Participants"
 msgstr "参加者"
 
-#: tournaments/templates/public_tournament_index.html:181
+#: tournaments/templates/public_tournament_index.html:175
 msgid "Institutions"
 msgstr "大学・団体"
 
-#: tournaments/templates/public_tournament_index.html:187
+#: tournaments/templates/public_tournament_index.html:181
 msgid "Feedback Progress"
 msgstr "フィードバック状況"
 
-#: tournaments/templates/public_tournament_index.html:193
+#: tournaments/templates/public_tournament_index.html:187
 msgid "Enter Ballot"
 msgstr "バロットを入力する"
 
-#: tournaments/templates/public_tournament_index.html:199
+#: tournaments/templates/public_tournament_index.html:193
 msgid "Enter Feedback"
 msgstr "フィードバックを入力する"
 
 #: tournaments/templates/public_tournament_index.html:215
-msgid "View All Draws"
-msgstr ""
-
-#: tournaments/templates/public_tournament_index.html:226
 msgid "Tournament Staff"
 msgstr ""
 
@@ -698,14 +690,14 @@ msgid "There is still %(num_unconfirmed)s ballot that is not confirmed. You shou
 msgid_plural "There are still %(num_unconfirmed)s ballots that are not confirmed. You should <strong>not</strong> proceed to the next round until all ballots are confirmed."
 msgstr[0] ""
 
-#: tournaments/templates/round_complete_check.html:98
+#: tournaments/templates/round_complete_check.html:99
 #, python-format
-msgid "The \"show public results\" setting is on and this round is marked as a <strong>silent</strong> round, so results will <strong>not</strong> show on the public page when you mark it as completed. You can mark or unmark rounds as silent in the <a href=\"%(round_changelist_url)s\">Edit Database area</a>."
+msgid "<p>This round is a silent round.</p> <p> Even though public view of results is enabled, results for <em>this</em> round will still be hidden from public view after completing this round. <p> <p> You can change which rounds are silent in the <a href=\"%(round_changelist_url)s\">Edit Database area</a>. </p>"
 msgstr ""
 
-#: tournaments/templates/round_complete_check.html:106
+#: tournaments/templates/round_complete_check.html:113
 #, python-format
-msgid "The \"show public results\" setting is on and this round is <strong>not</strong> marked as a silent round so the <strong>results <u>will</u> show on the public page</strong> when you mark it as completed. You can mark or unmark rounds as silent in the <a href=\"%(round_changelist_url)s\">Edit Database area</a>."
+msgid "<p><strong> Results for %(round_name)s will be published online once you mark this round as complete! </strong></p> <p> This round is <em>not</em> a silent round, and public view of results is enabled. </p> <p> If you want to keep the results for just this round hidden, you can mark this round as silent in the <a href=\"%(round_changelist_url)s\">Edit Database area</a>. </p> <p> If you want to disable the public view of results, you can do so in the <a href=\"%(public_features_url)s\">tournament configuration</a>. </p>"
 msgstr ""
 
 #: tournaments/templates/set_current_round.html:5
@@ -761,40 +753,28 @@ msgid "There are currently no tournaments set up on this site."
 msgstr ""
 
 #: tournaments/templates/site_index.html:72
-msgid "All Draws by Venue"
-msgstr ""
-
-#: tournaments/templates/site_index.html:76
-msgid "All Draws by School"
-msgstr ""
-
-#: tournaments/templates/site_index.html:80
-msgid "All Teams and Divisions"
-msgstr ""
-
-#: tournaments/templates/site_index.html:90
 msgid "New Tournament"
 msgstr ""
 
-#: tournaments/templates/site_index.html:93
+#: tournaments/templates/site_index.html:75
 msgid "Edit Database Area"
 msgstr ""
 
-#: tournaments/templates/site_index.html:96
+#: tournaments/templates/site_index.html:78
 msgid "Send a Test Email"
 msgstr ""
 
-#: tournaments/templates/site_index.html:105
+#: tournaments/templates/site_index.html:87
 #, python-format
 msgid "Change Password (%(user)s)"
 msgstr ""
 
-#: tournaments/templates/site_index.html:109
+#: tournaments/templates/site_index.html:91
 #, python-format
 msgid "Log Out (%(user)s)"
 msgstr ""
 
-#: tournaments/templates/site_index.html:115
+#: tournaments/templates/site_index.html:97
 msgid "Log In as Admin"
 msgstr "管理者としてログイン"
 
@@ -1093,6 +1073,15 @@ msgstr ""
 #: tournaments/views.py:179
 #, python-format
 msgid "%(this_round)s has been marked as completed. Moving on to %(next_round)s! Woohoo! Keep it up!"
+msgstr ""
+
+#: tournaments/views.py:208
+msgid "Whoops! It looks like someone's already created the first user account. Please log in."
+msgstr ""
+
+#: tournaments/views.py:216
+#, python-format
+msgid "Welcome! You've created an account for %s."
 msgstr ""
 
 #: tournaments/views.py:231

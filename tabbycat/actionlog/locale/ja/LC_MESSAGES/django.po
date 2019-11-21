@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-09-07 08:36\n"
+"POT-Creation-Date: 2019-11-20 23:12-0500\n"
+"PO-Revision-Date: 2019-11-21 04:30\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
@@ -53,8 +53,8 @@ msgid "Saved feedback"
 msgstr "保存済みフィードバック"
 
 #: actionlog/models.py:97
-msgid "Edited adjudicator test score"
-msgstr "編集済みジャッジテストスコア"
+msgid "Edited adjudicator base score"
+msgstr ""
 
 #: actionlog/models.py:98
 msgid "Set adjudicator note"
@@ -314,7 +314,7 @@ msgstr "アクションログ エントリー"
 
 #: actionlog/models.py:189
 msgid "All log entries require at least one of a user and an IP address."
-msgstr ""
+msgstr "全てのログエントリーには、最低でもユーザーとIPアドレスの少なくとも1つが必要です。"
 
 #: actionlog/models.py:228
 msgid "anonymous"
