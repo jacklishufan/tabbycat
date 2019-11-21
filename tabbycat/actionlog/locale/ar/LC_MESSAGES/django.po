@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-07-21 12:17\n"
+"POT-Creation-Date: 2019-11-20 23:12-0500\n"
+"PO-Revision-Date: 2019-11-21 04:28\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
@@ -53,8 +53,8 @@ msgid "Saved feedback"
 msgstr "حفظ التغذية الراجعة"
 
 #: actionlog/models.py:97
-msgid "Edited adjudicator test score"
-msgstr "قام بتعديل إستمارة درجات محكم"
+msgid "Edited adjudicator base score"
+msgstr ""
 
 #: actionlog/models.py:98
 msgid "Set adjudicator note"

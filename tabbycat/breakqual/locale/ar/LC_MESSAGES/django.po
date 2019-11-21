@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabbycat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-21 05:14-0700\n"
-"PO-Revision-Date: 2019-07-21 12:19\n"
+"POT-Creation-Date: 2019-11-20 23:12-0500\n"
+"PO-Revision-Date: 2019-11-21 04:31\n"
 "Last-Translator: philip_tc\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
@@ -105,79 +105,71 @@ msgstr ""
 msgid "AIDA 2019 (Australs, Dynamic Cap)"
 msgstr ""
 
-#: breakqual/models.py:39
-msgid "WADL division winners first"
-msgstr ""
-
-#: breakqual/models.py:40
-msgid "WADL division winners guaranteed"
-msgstr ""
-
-#: breakqual/models.py:44
+#: breakqual/models.py:42
 msgid "rule"
 msgstr "قاعدة"
 
-#: breakqual/models.py:45
+#: breakqual/models.py:43
 msgid "Rule for how the break is calculated (most tournaments should use \"Standard\")"
 msgstr "قاعدة كيفية حساب درجات التأهل"
 
-#: breakqual/models.py:48 breakqual/models.py:105
+#: breakqual/models.py:46 breakqual/models.py:96
 msgid "breaking teams"
 msgstr "الفرق المتأهله"
 
-#: breakqual/models.py:57 breakqual/models.py:76
+#: breakqual/models.py:55 breakqual/models.py:67
 msgid "break category"
 msgstr "فئة التأهل"
 
-#: breakqual/models.py:58
+#: breakqual/models.py:56
 msgid "break categories"
 msgstr "فئات التأهل"
 
-#: breakqual/models.py:78
+#: breakqual/models.py:69
 msgid "team"
 msgstr "فريق"
 
-#: breakqual/models.py:80
+#: breakqual/models.py:71
 msgid "rank"
 msgstr "الترتيب"
 
-#: breakqual/models.py:82
+#: breakqual/models.py:73
 msgid "break rank"
 msgstr "ترتيب التأهل"
 
-#: breakqual/models.py:91
+#: breakqual/models.py:82
 msgid "Capped"
 msgstr "محدود"
 
-#: breakqual/models.py:92
+#: breakqual/models.py:83
 msgid "Ineligible"
 msgstr "غير مؤهل"
 
-#: breakqual/models.py:93
+#: breakqual/models.py:84
 msgid "Different break"
 msgstr "تأهل مختلف"
 
-#: breakqual/models.py:94
+#: breakqual/models.py:85
 msgid "Disqualified"
 msgstr "غير متأهل"
 
-#: breakqual/models.py:95
+#: breakqual/models.py:86
 msgid "Lost coin toss"
 msgstr "خسر القرعة"
 
-#: breakqual/models.py:96
+#: breakqual/models.py:87
 msgid "Withdrawn"
 msgstr "إنسحب"
 
-#: breakqual/models.py:99
+#: breakqual/models.py:90
 msgid "remark"
 msgstr "اعادة وضع العلامات"
 
-#: breakqual/models.py:100
+#: breakqual/models.py:91
 msgid "Used to explain why an otherwise-qualified team didn't break"
 msgstr ""
 
-#: breakqual/models.py:104
+#: breakqual/models.py:95
 msgid "breaking team"
 msgstr "الفرق المتأهلة "
 
@@ -312,7 +304,7 @@ msgid "It looks like there aren't any break categories are defined. If you'd lik
 msgstr ""
 
 #: breakqual/templates/public_break_index.html:4
-#: breakqual/templates/public_break_index.html:5 breakqual/views.py:63
+#: breakqual/templates/public_break_index.html:5 breakqual/views.py:64
 msgid "Break"
 msgstr "تأهل "
 
@@ -325,57 +317,57 @@ msgstr ""
 msgid "Adjudicators"
 msgstr "المحكمين"
 
-#: breakqual/views.py:70
+#: breakqual/views.py:71
 #, python-format
 msgid "%(category)s Break"
 msgstr "%(category)s تأهل"
 
-#: breakqual/views.py:94
+#: breakqual/views.py:95
 #, python-format
 msgid "There was an error generating the break for category %(category)s: %(message)s"
 msgstr ""
 
-#: breakqual/views.py:137
+#: breakqual/views.py:138
 msgid "Eligible for"
 msgstr "مستحق ل"
 
-#: breakqual/views.py:141
+#: breakqual/views.py:142
 msgid "Edit Remark"
 msgstr "تعديل الملاحظات"
 
-#: breakqual/views.py:157
+#: breakqual/views.py:158
 #, python-format
 msgid "Changes to breaking team remarks saved and teams break updated for the following break categories: %(categories)s."
 msgstr ""
 
-#: breakqual/views.py:164
+#: breakqual/views.py:165
 #, python-format
 msgid "Changes to breaking team remarks saved and teams break updated for break category %(category)s."
 msgstr ""
 
-#: breakqual/views.py:169
+#: breakqual/views.py:170
 msgid "Changes to breaking team remarks saved."
 msgstr "تم حفظ تعديل درجات الفريق المتأهله "
 
-#: breakqual/views.py:193
+#: breakqual/views.py:194
 #, python-format
 msgid "Teams break generated for the following break categories: %(categories)s."
 msgstr ""
 
-#: breakqual/views.py:206
+#: breakqual/views.py:207
 msgid "Breaking Adjudicators"
 msgstr "الحكام المتأهلون"
 
-#: breakqual/views.py:231
+#: breakqual/views.py:232
 msgid "Break Eligibility"
 msgstr "إستحقاق التأهل"
 
-#: breakqual/views.py:260
+#: breakqual/views.py:261
 #, python-format
 msgid "%s Speakers"
 msgstr ""
 
-#: breakqual/views.py:263
+#: breakqual/views.py:264
 #, python-format
 msgid "Team has %(nspeakers)s speaker with the %(category)s speaker category assigned"
 msgid_plural "Team has %(nspeakers)s speakers with the %(category)s speaker category assigned"
