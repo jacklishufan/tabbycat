@@ -43,6 +43,4 @@ urlpatterns = [
     path('addspeaker/',
          api_import.api_create_speaker,
          name='api-add-speaker'),
-
 ]
-
