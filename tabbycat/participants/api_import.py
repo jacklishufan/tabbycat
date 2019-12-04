@@ -3,7 +3,7 @@ import logging
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.contrib.auth import authenticate
 
-from tournaments.models import Round,Tournament
+from tournaments.models import Tournament
 
 from .models import Institution, Speaker, Team
 
