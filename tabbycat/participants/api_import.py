@@ -1,7 +1,10 @@
 import logging
+
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.contrib.auth import authenticate
+
 from tournaments.models import Round,Tournament
+
 from .models import Institution, Speaker, Team
 
 logger = logging.getLogger(__name__)
@@ -46,7 +49,7 @@ def api_create_team(request,**kwargs):
     if auth:
         return auth
     new_code_name = request.POST.get('code_name','')
-    if Team.objects.filter(code_name =new_code_name ).exists():
+    if Team.objects.filter(code_name=new_code_name).exists():
         return HttpResponseBadRequest("BAD REQUEST:REPETITIVE ENTRY")
     new_reference = request.POST.get('reference','')
     tournament_ref = Tournament.objects.get(slug=kwargs['tournament_slug'])
@@ -88,7 +91,7 @@ def api_create_speaker(request,**kwargs):
         new_speaker.email = speaker_email
     if speaker_phone:
         new_speaker.phone = speaker_phone
-    if not Team.objects.filter(code_name = speaker_team).exists():
+    if not Team.objects.filter(code_name=speaker_team).exists():
         return HttpResponseBadRequest("BAD REQUEST:TEAM NOT FOUND")
     new_speaker.team = Team.objects.get(code_name=speaker_team)
     if speaker_gender in ['M','F','O']:
