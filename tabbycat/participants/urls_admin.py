@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import api_import
 
 urlpatterns = [
     path('list/',
@@ -33,4 +34,15 @@ urlpatterns = [
     path('adjudicator/<int:pk>/',
         views.AdjudicatorRecordView.as_view(),
         name='participants-adjudicator-record'),
+    path('addinst/',
+         api_import.api_create_institution,
+         name='api-add-institution'),
+    path('addteam/',
+         api_import.api_create_team,
+         name='api-add-team'),
+    path('addspeaker/',
+         api_import.api_create_speaker,
+         name='api-add-speaker'),
+
 ]
+
