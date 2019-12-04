@@ -1,37 +1,12 @@
-import json
 import logging
 from django.http import HttpResponse,HttpResponseBadRequest
-from django.contrib.auth import authenticate, login
-from django.conf import settings
-from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Count, Q
-from django.forms import HiddenInput
-from django.http import JsonResponse
-from django.utils.translation import gettext_lazy, ngettext
-from django.utils.translation import gettext as _
-from django.views.generic.base import View
-
-from actionlog.mixins import LogActionMixin
-from actionlog.models import ActionLogEntry
-from adjfeedback.progress import FeedbackProgressForAdjudicator, FeedbackProgressForTeam
-from notifications.models import BulkNotification
-from notifications.views import TournamentTemplateEmailCreateView
-from options.utils import use_team_code_names
-from tournaments.mixins import (PublicTournamentPageMixin,
-                                SingleObjectFromTournamentMixin, TournamentMixin)
+from django.contrib.auth import authenticate
 from tournaments.models import Round,Tournament
-from utils.misc import redirect_tournament, reverse_tournament
-from utils.mixins import AdministratorMixin, AssistantMixin
-from utils.views import ModelFormSetView, VueTableTemplateView
-from utils.tables import TabbycatTableBuilder
-
-from .models import Adjudicator, Institution, Speaker, SpeakerCategory, Team
-from .serializers import SpeakerSerializer
-from .tables import AdjudicatorDebateTable, TeamDebateTable
+from .models import Institution, Speaker, Team
 
 logger = logging.getLogger(__name__)
-#API TO ADD INSTITUTIONS, SPEAKERS, AND TEAMS THROUGH POST METHOD
+# API TO ADD INSTITUTIONS, SPEAKERS, AND TEAMS THROUGH POST METHOD
+
 
 def api_auth(request):
     if not request.method == 'POST':
@@ -44,6 +19,7 @@ def api_auth(request):
         return HttpResponseBadRequest("BAD REQUEST:AUTHENTICATION FAILED")
     if not user.is_staff:
         return HttpResponseBadRequest("BAD REQUEST:NO PERMIT")
+
 
 def api_create_institution(request,**kwargs):
     auth = api_auth(request)
@@ -61,15 +37,14 @@ def api_create_institution(request,**kwargs):
     new_institution.name = new_institution_name
     new_institution.code = new_institution_code
     new_institution.save()
-    #print("FINISHED")
     return HttpResponse("INSTITUTION CREATED")
+
 
 def api_create_team(request,**kwargs):
     print(kwargs)
     auth = api_auth(request)
     if auth:
         return auth
-    postdata = request.POST
     new_code_name = request.POST.get('code_name','')
     if Team.objects.filter(code_name =new_code_name ).exists():
         return HttpResponseBadRequest("BAD REQUEST:REPETITIVE ENTRY")
@@ -84,7 +59,7 @@ def api_create_team(request,**kwargs):
     if institution_name:
         if not Institution.objects.filter(code=institution_name).exists():
             return HttpResponseBadRequest("BAD REQUEST:INSTITUTION NOT FOUND")
-        institution_ref = Institution.objects.get(code = institution_name)
+        institution_ref = Institution.objects.get(code=institution_name)
         new_team.institution = institution_ref
     if request.POST.get('prefix','') == "TRUE":
         new_team.use_institution_prefix = True
@@ -93,6 +68,7 @@ def api_create_team(request,**kwargs):
         new_team.type = request.POST.get('type','')
     new_team.save()
     return HttpResponse("TEAM CREATED")
+
 
 def api_create_speaker(request,**kwargs):
     print(kwargs)
@@ -112,7 +88,7 @@ def api_create_speaker(request,**kwargs):
         new_speaker.email = speaker_email
     if speaker_phone:
         new_speaker.phone = speaker_phone
-    if not Team.objects.filter(code_name =speaker_team ).exists():
+    if not Team.objects.filter(code_name = speaker_team).exists():
         return HttpResponseBadRequest("BAD REQUEST:TEAM NOT FOUND")
     new_speaker.team = Team.objects.get(code_name=speaker_team)
     if speaker_gender in ['M','F','O']:
