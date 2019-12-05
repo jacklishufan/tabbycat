@@ -1,3 +1,6 @@
+import json
+from rest_framework.views import APIView
+
 import logging
 
 from django.http import HttpResponse,HttpResponseBadRequest
@@ -11,90 +14,86 @@ logger = logging.getLogger(__name__)
 # API TO ADD INSTITUTIONS, SPEAKERS, AND TEAMS THROUGH POST METHOD
 
 
-def api_auth(request):
-    if not request.method == 'POST':
-        return HttpResponseBadRequest("BAD REQUEST:WRONG METHOD")
-    username = request.POST.get('username','')
-    password = request.POST.get('password','')
-    user = authenticate(username=username, password=password)
-    print(user)
-    if not user:
-        return HttpResponseBadRequest("BAD REQUEST:AUTHENTICATION FAILED")
-    if not user.is_staff:
-        return HttpResponseBadRequest("BAD REQUEST:NO PERMIT")
+class DataImportApi(APIView):
+    def check_validity_institutions(self,data):
+        if data:
+            for i in data:
+                this_institution_code = i.get('code','')
+                this_institution_name = i.get('name','')
+                if not (this_institution_code and this_institution_name):
+                    return HttpResponseBadRequest("Malformed JSON INSTITUTION DATA:Lacking Values")
+                if Institution.objects.filter(code=this_institution_code).exists():
+                    return HttpResponseBadRequest("Repetitive Entry:{}".format(this_institution_code))
+
+    def check_validity_teams(self,data):
+        if data:
+            for i in data:
+                this_team_code = i.get('code','')
+                this_team_name = i.get('name','')
+                if not (this_team_code and this_team_name):
+                    return HttpResponseBadRequest("Malformed JSON TEAM DATA:Lacking Values")
+                if Team.objects.filter(code_name=this_team_code).exists():
+                    return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_code))
+
+    def create_institution(self,data):
+        new_institution_name = data.get('name', '')
+        new_institution_code = data.get('code', '')
+        new_institution = Institution()
+        new_institution.name = new_institution_name
+        new_institution.code = new_institution_code
+        new_institution.save()
+
+    def create_team(self, data,tournament):
+        new_team_name = data.get('name', '')
+        new_team_code = data.get('code', '')
+        new_team = Team()
+        new_team.reference = new_team_name
+        new_team.code_name = new_team_code
+        if data.get('nuse_institution_prefixame', '') == "FALSE":
+            new_team.use_institution_prefix = False
+        new_team.tournament = tournament
+        new_team.save()
+        speakers = data.get('speakers', '')
+        if speakers:
+            for i in speakers:
+                self.create_speaker(i,new_team)
 
 
-def api_create_institution(request,**kwargs):
-    auth = api_auth(request)
-    if auth:
-        return auth
-    postdata = request.POST
-    new_institution_name = request.POST.get('inst_name','')
-    new_institution_code = request.POST.get('inst_code','')
-    print(postdata)
-    if not (new_institution_name and new_institution_code):
-        return HttpResponseBadRequest("BAD REQUEST:LACKING DATA")
-    if Institution.objects.filter(code=new_institution_code).exists():
-        return HttpResponseBadRequest("BAD REQUEST:REPETITIVE ENTRY")
-    new_institution = Institution()
-    new_institution.name = new_institution_name
-    new_institution.code = new_institution_code
-    new_institution.save()
-    return HttpResponse("INSTITUTION CREATED")
+    def create_speaker(self,data,team):
+        new_speaker_name = data.get('name', '')
+        new_speaker_gender = data.get('gender', '')
+        new_speaker_email = data.get('email', '')
+        new_speaker = Speaker()
+        new_speaker.name = new_speaker_name
+        if new_speaker_gender:
+            new_speaker.gender = new_speaker_gender
+        if new_speaker_email:
+            new_speaker.email = new_speaker_email
+        new_speaker.team = team
+        new_speaker.save()
 
+    def post(self,request,**kwargs):
+        tournament_ref = Tournament.objects.get(slug=kwargs['tournament_slug'])
+        username = request.META.get("HTTP_APIUSERNAME")
+        password = request.META.get("HTTP_PASSWORD")
+        print(username)
+        print(password)
+        user = authenticate(username=username, password=password)
+        if not user:
+            return HttpResponseBadRequest("BAD REQUEST:AUTHENTICATION FAILED")
+        if not user.is_staff:
+            return HttpResponseBadRequest("BAD REQUEST:NO PERMIT")
+        data = request.body.decode('utf-8')
+        received = json.loads(data)
+        institutions = received.get('institutions','')
+        teams = received.get('teams', '')
+        instcheck = self.check_validity_institutions(institutions)
+        teamcheck = self.check_validity_teams(teams)
+        if instcheck or teamcheck:
+            return instcheck or teamcheck
+        for i in institutions:
+            self.create_institution(i)
+        for j in teams:
+            self.create_team(j,tournament_ref)
+        return HttpResponse("DATA SUBMITTED")
 
-def api_create_team(request,**kwargs):
-    print(kwargs)
-    auth = api_auth(request)
-    if auth:
-        return auth
-    new_code_name = request.POST.get('code_name','')
-    if Team.objects.filter(code_name=new_code_name).exists():
-        return HttpResponseBadRequest("BAD REQUEST:REPETITIVE ENTRY")
-    new_reference = request.POST.get('reference','')
-    tournament_ref = Tournament.objects.get(slug=kwargs['tournament_slug'])
-    new_team = Team()
-    new_team.tournament = tournament_ref
-    new_team.code_name = new_code_name
-    new_team.reference = new_reference
-    new_team.short_reference = request.POST.get('short_reference',new_reference)
-    institution_name = request.POST.get('institution','')
-    if institution_name:
-        if not Institution.objects.filter(code=institution_name).exists():
-            return HttpResponseBadRequest("BAD REQUEST:INSTITUTION NOT FOUND")
-        institution_ref = Institution.objects.get(code=institution_name)
-        new_team.institution = institution_ref
-    if request.POST.get('prefix','') == "TRUE":
-        new_team.use_institution_prefix = True
-    new_team.type = 'N'
-    if request.POST.get('type','') in ['N','S','C','B']:
-        new_team.type = request.POST.get('type','')
-    new_team.save()
-    return HttpResponse("TEAM CREATED")
-
-
-def api_create_speaker(request,**kwargs):
-    print(kwargs)
-    auth = api_auth(request)
-    if auth:
-        return auth
-    speaker_name = request.POST.get('speaker_name','')
-    speaker_email = request.POST.get('email', '')
-    speaker_phone = request.POST.get('phone', '')
-    speaker_gender = request.POST.get('gender', '')
-    speaker_team = request.POST.get('team', '')
-    if not (speaker_name and speaker_team):
-        return HttpResponseBadRequest("BAD REQUEST:LACKING DATA")
-    new_speaker = Speaker()
-    new_speaker.name = speaker_name
-    if speaker_email:
-        new_speaker.email = speaker_email
-    if speaker_phone:
-        new_speaker.phone = speaker_phone
-    if not Team.objects.filter(code_name=speaker_team).exists():
-        return HttpResponseBadRequest("BAD REQUEST:TEAM NOT FOUND")
-    new_speaker.team = Team.objects.get(code_name=speaker_team)
-    if speaker_gender in ['M','F','O']:
-        new_speaker.gender = speaker_gender
-    new_speaker.save()
-    return HttpResponse("Speaker Created")
