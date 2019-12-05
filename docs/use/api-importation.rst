@@ -6,54 +6,38 @@ Import Data Using API
 
 It is possible to import data from third-party registration system using POST method. The APIs are as follows
 
-Adding Institutions
-========================
-/<tournament code>/admin/participants/addspeaker/
+Adding Institutions, Teams and Speakers
+=========================================================================
+/<tournament code>/admin/participants/addimportdata/
 
-- username
+Header
+
+- apiusername
     Username of a staff account
 - password:
     Password of the staff account
-- inst_name:
-    Institution name
-- inst_code:
-     Institution code
 
-Adding Teams
-==============================
-/<tournament code>/admin/participants/addspeaker/
+Body (JSON)
 
-- username
-    Username of a staff account
-- password:
-    Password of the staff account
-- code_name:
-    Team code name for identification, it must be unique
-- reference
-    Reference of the team
-- institution
-    The name of institution
-- type (Optional)
-    -N, S, C or B
-- short_reference (Optional)
-    A shorter version of reference
+- institutions(List):
 
-Adding Speakers
-============================
+    name : the name of an institution
 
-/<tournament code>/admin/participants/addspeaker/
+    code : the identification codename of an institution
+- teams(List):
 
-- username
-    Username of a staff account
-- password:
-    Password of the staff account
-- speaker_name:
-    the name of the speaker
-- team
-    the name of the team this speaker belongs to
-- gender(Optional)
-    M, F, or O
-- phone (Optional)
-    this speaker's phone number
-- email (Optional)
-    this speaker's email address
+    name : the reference of the team
+
+    code : team codename
+
+    institution : the codename of the institution a team belongs to
+
+    uses_institution_prefix(bool) : whether the institution name will show up as a prefix in interface
+
+    speakers(List):
+        name : the name of a speaker
+
+        gender : the gender of a speaker
+
+        email : contact information
+
