@@ -1,4 +1,5 @@
 import json
+
 from rest_framework.views import APIView
 
 import logging
@@ -34,7 +35,7 @@ class DataImportApi(APIView):
             if not this_team_name:
                 return HttpResponseBadRequest("Malformed JSON TEAM DATA:Lacking Values")
             if Team.objects.filter(reference=this_team_name).exists():
-                return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_code))
+                return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_name))
 
     def create_institution(self,data):
         new_institution_name = data.get('name', '')
@@ -58,7 +59,6 @@ class DataImportApi(APIView):
         if speakers:
             for i in speakers:
                 self.create_speaker(i,new_team)
-
 
     def create_speaker(self,data,team):
         new_speaker_name = data.get('name', '')
@@ -97,4 +97,3 @@ class DataImportApi(APIView):
         for j in teams:
             self.create_team(j,tournament_ref)
         return HttpResponse("DATA SUBMITTED")
-
