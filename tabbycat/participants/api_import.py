@@ -16,24 +16,25 @@ logger = logging.getLogger(__name__)
 
 class DataImportApi(APIView):
     def check_validity_institutions(self,data):
-        if data:
-            for i in data:
-                this_institution_code = i.get('code','')
-                this_institution_name = i.get('name','')
-                if not (this_institution_code and this_institution_name):
-                    return HttpResponseBadRequest("Malformed JSON INSTITUTION DATA:Lacking Values")
-                if Institution.objects.filter(code=this_institution_code).exists():
-                    return HttpResponseBadRequest("Repetitive Entry:{}".format(this_institution_code))
+        if not data:
+            return
+        for i in data:
+            this_institution_code = i.get('code','')
+            this_institution_name = i.get('name','')
+            if not (this_institution_code and this_institution_name):
+                return HttpResponseBadRequest("Malformed JSON INSTITUTION DATA:Lacking Values")
+            if Institution.objects.filter(code=this_institution_code).exists():
+                return HttpResponseBadRequest("Repetitive Entry:{}".format(this_institution_code))
 
     def check_validity_teams(self,data):
-        if data:
-            for i in data:
-                this_team_code = i.get('code','')
-                this_team_name = i.get('name','')
-                if not (this_team_code and this_team_name):
-                    return HttpResponseBadRequest("Malformed JSON TEAM DATA:Lacking Values")
-                if Team.objects.filter(code_name=this_team_code).exists():
-                    return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_code))
+        if not data:
+            return
+        for i in data:
+            this_team_name = i.get('name','')
+            if not this_team_name:
+                return HttpResponseBadRequest("Malformed JSON TEAM DATA:Lacking Values")
+            if Team.objects.filter(reference=this_team_name).exists():
+                return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_code))
 
     def create_institution(self,data):
         new_institution_name = data.get('name', '')
