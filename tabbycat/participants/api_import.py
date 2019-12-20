@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate
 
 from tournaments.models import Tournament
 
-from .models import Institution, Speaker, Team, Adjudicator
+from .models import Adjudicator, Institution, Speaker, Team
 
 logger = logging.getLogger(__name__)
 # API TO ADD INSTITUTIONS, SPEAKERS, AND TEAMS THROUGH POST METHOD
@@ -36,6 +36,7 @@ class DataImportApi(APIView):
                 return HttpResponseBadRequest("Malformed JSON TEAM DATA:Lacking Values")
             if Team.objects.filter(reference=this_team_name).exists():
                 return HttpResponseBadRequest("Repetitive Entry:{}".format(this_team_name))
+
     def check_validity_adjudicators(self,data):
         if not data:
             return
@@ -95,6 +96,14 @@ class DataImportApi(APIView):
             new_adjudicator.institution = Institution.objects.get(code=new_adjudicator_institution)
         new_adjudicator.save()
 
+    def is_not_valid(self, institutions, adjudicators, teams):
+        instcheck = self.check_validity_institutions(institutions)
+        teamcheck = self.check_validity_teams(teams)
+        adjcheck = self.check_validity_adjudicators(adjudicators)
+        if instcheck or teamcheck or adjcheck:
+            return instcheck or teamcheck or adjcheck
+        return False
+
     def post(self,request,**kwargs):
         tournament_ref = Tournament.objects.get(slug=kwargs['tournament_slug'])
         username = request.META.get("HTTP_APIUSERNAME")
@@ -111,11 +120,9 @@ class DataImportApi(APIView):
         institutions = received.get('institutions','')
         teams = received.get('teams', '')
         adjudicators = received.get('adjudicators', '')
-        instcheck = self.check_validity_institutions(institutions)
-        teamcheck = self.check_validity_teams(teams)
-        adjcheck = self.check_validity_adjudicators(adjudicators)
-        if instcheck or teamcheck or adjcheck:
-            return instcheck or teamcheck or adjcheck
+        validity =  self.is_not_valid(institutions, adjudicators, teams)
+        if validity:
+            return validity
         for i in institutions:
             self.create_institution(i)
         for j in teams:
