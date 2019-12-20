@@ -260,12 +260,27 @@ SUMMERNOTE_CONFIG = {
 # Database
 # ==============================================================================
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE'  : 'django.db.backends.postgresql',
+        'NAME'    : 'testtab',  # put your PostgreSQL database's name in here
+        'USER'    : 'jack',  # put your PostgreSQL login role's user name in here
+        'PASSWORD': '86656861',  # put your PostgreSQL login role's password in here
+        'HOST':     'localhost',
+        'PORT':     '5432',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+#}
 # ==============================================================================
 # Channels
 # ==============================================================================

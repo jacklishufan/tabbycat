@@ -120,7 +120,7 @@ class DataImportApi(APIView):
         institutions = received.get('institutions','')
         teams = received.get('teams', '')
         adjudicators = received.get('adjudicators', '')
-        validity =  self.is_not_valid(institutions, adjudicators, teams)
+        validity = self.is_not_valid(institutions, adjudicators, teams)
         if validity:
             return validity
         for i in institutions:
