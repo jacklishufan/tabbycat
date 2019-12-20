@@ -19,6 +19,17 @@ Header
 
 Body (JSON)
 
+- adjudicators(List):
+
+    name : the name of an adjudicator
+
+    gender : the gender of an adjudicator
+
+    email : contact information
+
+    institution: the institution an adjudicator belongs to
+
+
 - institutions(List):
 
     name : the name of an institution
