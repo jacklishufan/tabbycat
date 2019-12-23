@@ -109,8 +109,6 @@ class DataImportApi(APIView):
         tournament_ref = Tournament.objects.get(slug=kwargs['tournament_slug'])
         username = request.META.get("HTTP_APIUSERNAME")
         password = request.META.get("HTTP_PASSWORD")
-        print(username)
-        print(password)
         user = authenticate(username=username, password=password)
         if not user:
             return HttpResponseBadRequest("BAD REQUEST:AUTHENTICATION FAILED")
@@ -136,7 +134,6 @@ class DataImportApi(APIView):
             i['tournament'] = kwargs['tournament_slug']
             serializers.append(AdjudicatorSerializerImport(data=i))
         for i in serializers:
-            print(i)
             i.is_valid(raise_exception=True)
             i.save()
             serializers.remove(i)
