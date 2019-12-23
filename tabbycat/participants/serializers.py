@@ -3,6 +3,9 @@ from rest_framework import serializers
 from .models import Adjudicator, Institution, Speaker, SpeakerCategory, Team
 
 
+from tournaments.models import Tournament
+
+
 class SpeakerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Speaker
@@ -44,3 +47,51 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = ('id', 'short_name', 'long_name', 'code_name', 'points',
                   'institution', 'speakers', 'break_categories')
+
+
+class SpeakerSerializerImport(serializers.ModelSerializer):
+    class Meta:
+        model = Speaker
+        fields = ('name', 'gender','email')
+
+
+class AdjudicatorSerializerImport(serializers.ModelSerializer):
+    institution = serializers.SlugRelatedField(
+        queryset=Institution.objects.all(),
+        slug_field="code"
+    )
+    tournament = serializers.SlugRelatedField(
+        queryset=Tournament.objects.all(),
+        slug_field='slug'
+    )
+    class Meta:
+        model = Adjudicator
+        fields = ('name', 'gender', 'email', 'institution','tournament')
+
+
+class TeamSerializerImport(serializers.ModelSerializer):
+    institution = serializers.SlugRelatedField(
+        queryset=Institution.objects.all(),
+        slug_field='code'
+    )
+    tournament = serializers.SlugRelatedField(
+        queryset=Tournament.objects.all(),
+        slug_field='slug'
+    )
+    speakers = SpeakerSerializerImport(many=True)
+    class Meta:
+        model = Team
+        fields = ('reference', 'code_name',
+                  'institution', 'speakers','tournament')
+    def create(self,validated_data):
+        speaker_data = validated_data.pop('speakers')
+        team = Team.objects.create(**validated_data)
+        for i in speaker_data:
+            Speaker.objects.create(team=team, **i)
+        return team
+
+
+class InstitutionSerializerImport(serializers.ModelSerializer):
+    class Meta:
+        model = Institution
+        fields = ('name', 'code')

@@ -4,12 +4,13 @@ from rest_framework.views import APIView
 
 import logging
 
-from django.http import HttpResponse,HttpResponseBadRequest
+from django.http import HttpResponse,HttpResponseBadRequest,JsonResponse
 from django.contrib.auth import authenticate
 
 from tournaments.models import Tournament
 
 from .models import Adjudicator, Institution, Speaker, Team
+from.serializers import TeamSerializerImport, AdjudicatorSerializerImport, InstitutionSerializerImport
 
 logger = logging.getLogger(__name__)
 # API TO ADD INSTITUTIONS, SPEAKERS, AND TEAMS THROUGH POST METHOD
@@ -117,16 +118,26 @@ class DataImportApi(APIView):
             return HttpResponseBadRequest("BAD REQUEST:NO PERMIT")
         data = request.body.decode('utf-8')
         received = json.loads(data)
-        institutions = received.get('institutions','')
-        teams = received.get('teams', '')
-        adjudicators = received.get('adjudicators', '')
-        validity = self.is_not_valid(institutions, adjudicators, teams)
-        if validity:
-            return validity
-        for i in institutions:
-            self.create_institution(i)
-        for j in teams:
-            self.create_team(j,tournament_ref)
-        for k in adjudicators:
-            self.create_adjudicator(k)
-        return HttpResponse("DATA SUBMITTED")
+        received['tournament']=kwargs['tournament_slug']
+        institutions_data = received.get("institutions",[])
+        teams_data = received.get("teams",[])
+        adjudicators_data = received.get("adjudicators",[])
+        serializers = []
+        for i in institutions_data:
+            serializers.append(InstitutionSerializerImport(data=i))
+        for i in serializers:
+            i.is_valid(raise_exception=True)
+            i.save()
+            serializers.remove(i) #Institution need to be created first before validitation of teams
+        for i in teams_data:
+            i['tournament'] = kwargs['tournament_slug']
+            serializers.append(TeamSerializerImport(data=i))
+        for i in adjudicators_data:
+            i['tournament'] = kwargs['tournament_slug']
+            serializers.append(AdjudicatorSerializerImport(data=i))
+        for i in serializers:
+            print(i)
+            i.is_valid(raise_exception=True)
+            i.save()
+            serializers.remove(i)
+        return HttpResponse("DATA SENT")
