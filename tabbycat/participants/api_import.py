@@ -7,7 +7,6 @@ import logging
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.contrib.auth import authenticate
 
-from tournaments.models import Tournament
 
 from .models import Adjudicator, Institution, Speaker, Team
 from.serializers import AdjudicatorSerializerImport, InstitutionSerializerImport, TeamSerializerImport
