@@ -64,6 +64,7 @@ class AdjudicatorSerializerImport(serializers.ModelSerializer):
         queryset=Tournament.objects.all(),
         slug_field='slug'
     )
+
     class Meta:
         model = Adjudicator
         fields = ('name', 'gender', 'email', 'institution','tournament')
@@ -79,10 +80,12 @@ class TeamSerializerImport(serializers.ModelSerializer):
         slug_field='slug'
     )
     speakers = SpeakerSerializerImport(many=True)
+
     class Meta:
         model = Team
         fields = ('reference', 'code_name',
                   'institution', 'speakers','tournament')
+
     def create(self,validated_data):
         speaker_data = validated_data.pop('speakers')
         team = Team.objects.create(**validated_data)
