@@ -130,7 +130,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Speaker
-        fields = ('url', 'id', 'name', 'gender', 'email', 'phone', 'anonymous', 'pronoun',
+        fields = ('url', 'id', "team", 'name', 'gender', 'email', 'phone', 'anonymous', 'pronoun',
                   'categories')
 
     def create(self, validated_data):
