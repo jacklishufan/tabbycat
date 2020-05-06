@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c0591e2-b69d-4863-974a-eb46cb0f6c69" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tabbycat/notifications/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tabbycat/notifications/models.py" afterDir="false" />
-    </list>
+    <list default="true" id="2c0591e2-b69d-4863-974a-eb46cb0f6c69" name="Default Changelist" comment="" />
     <list id="11bf1f48-254c-4163-b674-1ab416cd1570" name="Revert &quot;Added 3 POST APIs which make it possible to import registration data from other systems using HTTP request.&quot;" comment="Revert &quot;Added 3 POST APIs which make it possible to import registration data from other systems using HTTP request.&quot;&#10;&#10;This reverts commit 7f66c6de" />
     <list id="40aaab46-b976-4533-a5f9-5eb8eea657bb" name="Revert &quot;Composition Revision&quot;" comment="" />
     <list id="879703b1-f7b5-4aba-9e47-52805ba03ae1" name="Revert &quot;Composition Revision&quot;-2" comment="Revert &quot;Composition Revision&quot;&#10;&#10;This reverts commit 5dddd07f" />
@@ -250,19 +247,6 @@
             </path>
             <path>
               <item name="tabUCB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tabUCB" type="462c0819:PsiDirectoryNode" />
-              <item name="tabbycat" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tabUCB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tabUCB" type="462c0819:PsiDirectoryNode" />
-              <item name="tabbycat" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tabUCB" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
             <path>
@@ -358,7 +342,7 @@
       <workItem from="1581541853951" duration="327000" />
       <workItem from="1586333384229" duration="4516000" />
       <workItem from="1588765329645" duration="1775000" />
-      <workItem from="1588772022630" duration="2490000" />
+      <workItem from="1588772022630" duration="2750000" />
     </task>
     <task id="LOCAL-00002" summary="Added 3 POST APIs which make it possible to import registration data from other systems using HTTP request.">
       <created>1575448093076</created>
@@ -707,7 +691,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171244000" />
+    <option name="totallyTimeSpent" value="171504000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
