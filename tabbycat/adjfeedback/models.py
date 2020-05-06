@@ -267,27 +267,27 @@ class AdjudicatorFeedback(Submission):
 
     @property
     def feedback_weight(self):
-        print("TEST FLAG")
-        FEEDBACKWEIGHT = {
-            0:0.1,
-            1:0.2,
-            2:0.3,
-            3:0.4,
-
-        }
-        if self.source_team:
-            try:
-                return FEEDBACKWEIGHT[self.source_team.points]
-            except:
-                return 1
-        if self.source_adjudicator:
-            try:
-                if self.source_adjudicator.type == "chair":
-                    return 0.2
-                else:
-                    return 1
-            except:
-                return 1
+        # print("TEST FLAG")
+        # FEEDBACKWEIGHT = {
+        #     0:0.1,
+        #     1:0.2,
+        #     2:0.3,
+        #     3:0.4,
+        #
+        # }
+        # if self.source_team:
+        #     try:
+        #         return FEEDBACKWEIGHT[self.source_team.points]
+        #     except:
+        #         return 1
+        # if self.source_adjudicator:
+        #     try:
+        #         if self.source_adjudicator.type == "chair":
+        #             return 0.2
+        #         else:
+        #             return 1
+        #     except:
+        #         return 1
         if self.round:
             return self.round.feedback_weight
 

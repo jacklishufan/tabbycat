@@ -405,19 +405,19 @@ class Adjudicator(Person):
         return self.weighted_score(weight)
 
     def _feedback_score(self):
-        from adjallocation.models import DebateAdjudicator
-        self.feedbacksss = self.adjudicatorfeedback_set.filter(confirmed=True, ignored=False).exclude(
-            source_adjudicator__type=DebateAdjudicator.TYPE_TRAINEE)
-        base = 0
-        print(self.feedbacksss)
-        b = list(map(lambda x: x.feedback_weight,self.feedbacksss))
-        y = sum(b)
-        out = list(map(lambda x:[x.score*x.feedback_weight/y, x.feedback_weight],self.feedbacksss))
-        a = list(map(lambda x:x[0],out))
-        print(a,b)
-        return sum(a)
-
-        return self._feedback_score_cache
+        # from adjallocation.models import DebateAdjudicator
+        # self.feedbacksss = self.adjudicatorfeedback_set.filter(confirmed=True, ignored=False).exclude(
+        #     source_adjudicator__type=DebateAdjudicator.TYPE_TRAINEE)
+        # base = 0
+        # print(self.feedbacksss)
+        # b = list(map(lambda x: x.feedback_weight,self.feedbacksss))
+        # y = sum(b)
+        # out = list(map(lambda x:[x.score*x.feedback_weight/y, x.feedback_weight],self.feedbacksss))
+        # a = list(map(lambda x:x[0],out))
+        # print(a,b)
+        # return sum(a)
+        #
+        # return self._feedback_score_cache
         try:
             return self._feedback_score_cache
         except AttributeError:
