@@ -1,8 +1,20 @@
-from django.contrib.postgres.fields import JSONField
+#from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+import json
 
+class JSONField(models.TextField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        val = super().get_prep_value(value)
+        return json.dumps(val)
+
+    def to_python(self, value):
+        val = super().get_prep_value(value)
+        return json.loads(val)
 
 class SentMessage(models.Model):
 
