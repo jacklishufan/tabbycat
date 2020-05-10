@@ -82,3 +82,7 @@ nosetests.xml
 
 # Redis
 dump.rdb
+
+tabbycat/*/migrations
+*.sqlite3
+
