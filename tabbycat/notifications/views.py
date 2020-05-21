@@ -261,7 +261,7 @@ class CustomEmailCreateView(RoleColumnMixin, BaseSelectPeopleEmailView):
 
     def post(self, request, *args, **kwargs):
         people = Person.objects.filter(id__in=list(map(int, request.POST.getlist('recipients'))))
-
+        print("HERE")
         async_to_sync(get_channel_layer().send)("notifications", {
             "type": "email_custom",
             "subject": request.POST['subject_line'],
@@ -269,7 +269,7 @@ class CustomEmailCreateView(RoleColumnMixin, BaseSelectPeopleEmailView):
             "tournament": self.tournament.id,
             "send_to": [(p.id, p.email) for p in people]
         })
-
+        print("HERE")
         self.add_sent_notification(len(people))
         return super().post(request, *args, **kwargs)
 

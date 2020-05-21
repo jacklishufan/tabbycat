@@ -9,12 +9,12 @@ class JSONField(models.TextField):
         super().__init__(*args, **kwargs)
 
     def get_prep_value(self, value):
-        val = super().get_prep_value(value)
-        return json.dumps(val)
+        #val = super().get_prep_value(value)
+        return json.dumps(value)
 
     def to_python(self, value):
-        val = super().get_prep_value(value)
-        return json.loads(val)
+        #val = super().get_prep_value(value)
+        return json.loads(value)
 
 class SentMessage(models.Model):
 

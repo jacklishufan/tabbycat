@@ -32,18 +32,24 @@ class NotificationQueueConsumer(SyncConsumer):
 
     def _send(self, event, messages, records):
         try:
-            mail.get_connection().send_messages(messages)
+            print(messages)
+            mail.get_connection(
+                host = 'smtp.126.com',
+                port = 25,
+                username = 'lsl42@126.com',
+                password = 'DTHGQHGBRHXUPXWF',
+            ).send_messages(messages)
         except SMTPException as e:
-            self.send_error(e, _("Failed to send e-mails."), event)
+            print(e, _("Failed to send e-mails."), event)
             raise
         except ConnectionError as e:
-            self.send_error(e, _("Connection error sending e-mails."), event)
+            print(e, _("Connection error sending e-mails."), event)
             raise
         else:
             SentMessage.objects.bulk_create(records)
 
     def _get_from_fields(self, t):
-        from_email = "%s <%s>" % (t.short_name, settings.DEFAULT_FROM_EMAIL)
+        from_email = 'lsl42@126.com' #"%s <%s>" % (t.short_name, settings.DEFAULT_FROM_EMAIL)
         reply_to = None
         if t.pref('reply_to_address'):
             reply_to = "%s <%s>" % (t.pref('reply_to_name'), t.pref('reply_to_address'))
@@ -109,7 +115,7 @@ class NotificationQueueConsumer(SyncConsumer):
     def email_custom(self, event):
         messages = []
         records = []
-
+        print("SSSS")
         t = Tournament.objects.get(id=event['tournament'])
         from_email, reply_to = self._get_from_fields(t)
 
@@ -119,7 +125,7 @@ class NotificationQueueConsumer(SyncConsumer):
             email = mail.EmailMultiAlternatives(
                 subject=event['subject'], body=html2text(event['body']),
                 from_email=from_email, to=[address], reply_to=reply_to,
-                headers={'X-SMTPAPI': json.dumps({'unique_args': {'hook-id': hook_id}})} # SendGrid-specific 'hook-id'
+                #headers={'X-SMTPAPI': json.dumps({'unique_args': {'hook-id': hook_id}})} # SendGrid-specific 'hook-id'
             )
             email.attach_alternative(event['body'], "text/html")
             messages.append(email)
@@ -128,7 +134,8 @@ class NotificationQueueConsumer(SyncConsumer):
             records.append(
                 SentMessage(recipient_id=pk, email=address,
                             method=SentMessage.METHOD_TYPE_EMAIL,
-                            tournament=t, messsage=raw_message,
+                            #tournament=t,
+                            #messsage=raw_message,
                             message_id=raw_message['Message-ID'], hook_id=hook_id,
                             notification=bulk_notification)
             )
