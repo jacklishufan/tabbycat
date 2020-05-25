@@ -4,6 +4,8 @@ tabbycat/settings/local.py
 tabbycat/settings/development.py
 .gitmodules/
 __pycache__/
+*.json
+*.out
 
 # Compilation
 tabbycat/staticfiles/
