@@ -392,8 +392,8 @@ class Adjudicator(Person):
         if feedback_score is None:
             feedback_score = 0
             feedback_weight = 0
-        #return self.base_score * (1 - feedback_weight) + (feedback_weight * feedback_score)
-        return feedback_score
+        return self.base_score * (1 - feedback_weight) + (feedback_weight * feedback_score)
+        #return feedback_score
 
     @cached_property
     def score(self):

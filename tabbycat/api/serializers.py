@@ -158,7 +158,8 @@ class TeamSerializer(serializers.ModelSerializer):
     url = TournamentHyperlinkedIdentityField(view_name='api-team-detail')
     institution = serializers.HyperlinkedRelatedField(
         view_name='api-global-institution-detail',
-        queryset=Institution.objects.all()
+        queryset=Institution.objects.all(),
+        required=False
     )
     break_categories = TournamentHyperlinkedRelatedField(
         many=True,
