@@ -22,6 +22,7 @@ from venues.serializers import VenueSerializer
 from .consumers import CheckInEventConsumer
 from .models import PersonIdentifier, VenueIdentifier
 from .utils import create_identifiers, get_unexpired_checkins
+from django.http import JsonResponse
 
 
 class CheckInPreScanView(TournamentMixin, TemplateView):
@@ -303,3 +304,74 @@ class ParticipantCheckinView(PublicTournamentPageMixin, PostOnlyRedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         return reverse_tournament('privateurls-person-index', self.tournament, kwargs={'url_key': kwargs['url_key']})
+
+class PublicCheckInFormView(PublicTournamentPageMixin,CheckInPeopleStatusView):
+    public_page_preference = "public_checkins"
+    template_name = "checkin_public.html"
+    page_title = _("Speaker Self Check-ins")
+
+#Actually an API Endpoint
+class ParticipantCheckinPublicView(PublicTournamentPageMixin, PostOnlyRedirectView):
+    public_page_preference = 'public_checkins'
+
+    def get(self, request, *args, **kwargs):
+        t = self.tournament
+        barcode = kwargs['barcode']
+        try:
+            identifier = PersonIdentifier.objects.get(barcode=barcode)
+        except ObjectDoesNotExist:
+            messages.error(self.request, _(
+                "Could not check you in as you do not have an identifying code — your tab director may need to make you an identifier."))
+            return super().post(request, *args, **kwargs)
+        checkins = get_unexpired_checkins(t, 'checkin_window_people')
+        existing_checkin = checkins.filter(identifier=identifier)
+        if existing_checkin.exists():
+            return JsonResponse({"messege":True})
+        else:
+            return JsonResponse({"messege":False})
+
+    def post(self, request, *args, **kwargs):
+        t = self.tournament
+
+        action = request.POST['action']
+        barcode = kwargs['barcode']
+        try:
+            identifier = PersonIdentifier.objects.get(barcode=barcode)
+        except ObjectDoesNotExist:
+            messages.error(self.request, _(
+                "Could not check you in as you do not have an identifying code — your tab director may need to make you an identifier."))
+            return super().post(request, *args, **kwargs)
+
+        checkins = get_unexpired_checkins(t, 'checkin_window_people')
+        existing_checkin = checkins.filter(identifier=identifier)
+        if action == 'revoke':
+            if existing_checkin.exists():
+                messages.success(self.request, _("You have revoked your check-in."))
+            else:
+                return JsonResponse({"messege": "Whoops! Looks like your check-in was already revoked."})
+                messages.error(self.request, _("Whoops! Looks like your check-in was already revoked."))
+        elif action == 'checkin':
+            if existing_checkin.exists():
+                return JsonResponse({"messege":"Whoops! Looks like you're already checked in."})
+                messages.error(self.request, _("Whoops! Looks like you're already checked in."))
+            else:
+                messages.success(self.request, _("You are now checked in."))
+        else:
+            return TemplateResponse(request=self.request, template='400.html', status=400)
+
+        group_name = CheckInEventConsumer.group_prefix + "_" + t.slug
+
+        # Override permissions check - no user but authenticated through URL
+        async_to_sync(get_channel_layer().group_send)(
+            group_name, {
+                'type': 'broadcast_checkin',
+                'content': {
+                    'barcodes': [identifier.barcode],
+                    'status': action == 'checkin',
+                    'type': 'people',
+                    'component_id': None
+                }
+            }
+        )
+        return JsonResponse({"messege":"Successful"})
+        return super().post(request, *args, **kwargs)

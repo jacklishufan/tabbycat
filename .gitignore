@@ -15,6 +15,7 @@ tabbycat/static/js/
 tabbycat/static/jsi18n/
 tabbycat/static/vue/
 tabbycat/static/fonts/
+tabbycat/statifile/
 
 # Translations
 .tx/

@@ -1,10 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load debate_tags %}
 
-</body>
-</html>
+{% block content %}
+
+  <div id="app">
+
+<!--<select name="cars" id="cars">-->
+<!--  <option value="volvo">Volvo</option>-->
+<!--  <option value="saab">Saab</option>-->
+<!--  <option value="mercedes">Mercedes</option>-->
+<!--  <option value="audi">Audi</option>-->
+<!--</select>-->
+<!--<v-select :options="['Canada', 'United States']"></v-select>-->
+<el-row  v-if="disabled && init">
+      <el-alert
+    title="You have checked in, Thank you!"
+    type="error"
+
+    show-icon>
+</el-row>
+
+<el-row>
+  <el-col :span="24"><div class="grid-content bg-purple-dark">
+      <el-select
+        v-model="data1"
+        filterable
+        @change ="enable_button"
+        placeholder="Please select you name">
+    <el-option v-for="item in speakers"
+    :label="item.name+' ('+item.team+')'"
+    :key="item.id"
+    :value="item.identifier"
+    >
+    </el-option>
+
+</el-select>
+
+          <el-button
+                  v-bind:disabled="disabled"
+                  @click="submit_checkin">
+              Check In</el-button>
+
+          <el-button
+                  v-bind:disabled="!revoke"
+                  @click="submit_revoke">
+              Revoke</el-button>
+
+  </div></el-col>
+</el-row>
+          <el-dialog :visible.sync="enabled" title="Submitted">
+      <p>[[messege]]</p>
+    </el-dialog>
+
+<!--    {{speakers}}-->
+<!--    <check-in-status-container :initial-events="events"-->
+<!--                               :tournament-slug="tournamentSlug"-->
+<!--                               :adjudicators="adjudicators"-->
+<!--                               :speakers="speakers"-->
+<!--                               :venues="venues"-->
+<!--                               :assistant-url="assistantUrl"-->
+<!--                               :team-codes="teamCodes"-->
+<!--                               :for-admin="forAdmin"-->
+<!--                               :team-size="teamSize">-->
+<!--    </check-in-status-container>-->
+  </div>
+
+{% endblock content %}
+
+{% block js %}
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>  <script>
+    var app = new Vue({
+      el: '#app',
+      delimiters: ['[[', ']]'],
+      data:function () {
+        return {
+          data1:[],
+          init:false,
+          disabled:true,
+          enabled:false,
+          revoke:false,
+          messege:'',
+          tournament:'{{ tournament_slug }}',
+          speakers:{% if speakers %}{{ speakers|safe }}{% else %}null{% endif %}.sort(
+              function (a, b) {
+                var nameA = a.name.toUpperCase() // ignore upper and lowercase
+                var nameB = b.name.toUpperCase() // ignore upper and lowercase
+                if (nameA < nameB) {
+                  return -1
+                }
+                if (nameA > nameB) {
+                  return 1
+                }
+              },
+        )
+      }
+      },
+      methods:{
+        enable_button(){
+           $.ajax(
+            {
+                type:'GET',
+                url: '{% url 'checkins-public-submit' tournament_slug 333 %}'.replace('333',this.data1[0]),
+                async: true,
+                success: res =>  {
+                    this.disabled = res.messege
+                    this.revoke = this.disabled
+                    console.log(res)
+                    console.log(res.messege)
+                }
+            }
+          )
+          this.init = true
+          //this.disabled = false
+        },
+        submit_checkin(){
+          $.ajax(
+            {
+                type:'POST',
+                url: '{% url 'checkins-public-submit' tournament_slug 333 %}'.replace('333',this.data1[0]),
+                async: true,
+                data: {
+                  "action":"checkin"
+                },
+                success: res=> {
+                    console.log(res)
+                    this.messege = res.messege
+                    this.enabled = true
+                  this.enable_button()
+                }
+            }
+          )
+        },
+        submit_revoke(){
+          $.ajax(
+            {
+                type:'POST',
+                url: '{% url 'checkins-public-submit' tournament_slug 333 %}'.replace('333',this.data1[0]),
+                async: true,
+                data: {
+                  "action":"revoke"
+                },
+                success: res=> {
+                    console.log(res)
+                    this.messege = res.messege
+                    this.enabled = true
+                  this.enable_button()
+                }
+            }
+          )
+        }
+      }
+    })
+</script>
+{{ block.super }}
+{% endblock js %}
