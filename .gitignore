@@ -6,7 +6,8 @@ tabbycat/settings/development.py
 __pycache__/
 *.json
 *.out
-
+.idea/*
+tabbycat/static/*
 # Compilation
 tabbycat/staticfiles/
 tabbycat/static/css/
