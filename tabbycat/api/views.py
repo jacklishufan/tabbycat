@@ -142,6 +142,7 @@ class SetTeamAPIView(APIView):
             try:
                 inst = [x for x in institutions if x.name in team.reference][0]
                 team.institution = inst
+                team.save()
                 for speaker in team.speakers.all():
                     speaker.institution = inst
                     speaker.save()
