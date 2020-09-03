@@ -16,7 +16,7 @@ urlpatterns = [
     path('',
         views.APIRootView.as_view(),
         name='api-root'),
-    path('update_teams/',views.SetTeamAPIView.as_view()),
+    path('update_teams/',views.SetTeamAPIView.as_view(),name='api-global-update'),
 
     path('tournaments/', include([
 
