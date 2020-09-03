@@ -136,7 +136,7 @@ class SetTeamAPIView(APIView):
         while code in past_set:
             code = self.generate_word(3)
         past_set.add(code)
-        for team in Team.objects.all().prefetch_related("speakers"):
+        for team in Team.objects.all():
             team.code_name = code
             team.short_reference = team.reference
             try:
