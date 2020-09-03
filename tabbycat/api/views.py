@@ -132,11 +132,12 @@ class SetTeamAPIView(APIView):
         institutions = Institution.objects.all()
         institutions = list(institutions)
         past_set = set()
-        code = self.generate_word(3)
-        while code in past_set:
-            code = self.generate_word(3)
-        past_set.add(code)
+
         for team in Team.objects.all():
+            code = self.generate_word(3)
+            while code in past_set:
+                code = self.generate_word(3)
+            past_set.add(code)
             team.code_name = code
             team.short_reference = team.reference
             try:
