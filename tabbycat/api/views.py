@@ -5,16 +5,18 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.views import APIView
 
 from options.models import TournamentPreferenceModel
 from tournaments.models import Tournament
 from tournaments.mixins import TournamentFromUrlMixin
 
-from participants.models import Institution
+from participants.models import Institution,Team,Speaker
 
 from django.db.models import Prefetch
 
 from . import serializers
+import random
 
 
 class TournamentAPIMixin(TournamentFromUrlMixin):
@@ -121,3 +123,34 @@ class SpeakerViewSet(TournamentAPIMixin, AdministratorAPIMixin, ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
+
+class SetTeamAPIView(APIView):
+
+    def get(self,request, *args, **kwargs):
+        institutions = Institution.objects.all()
+        institutions = list(institutions)
+        past_set = set()
+        code = self.generate_word(3)
+        while code in past_set:
+            code = self.generate_word(3)
+        past_set.add(code)
+        for team in Team.objects.all().prefetch_related("speakers"):
+            team.code_name = code
+            team.short_reference = team.reference
+            try:
+                inst = [x for x in institutions if x.name in team.reference][0]
+                team.institution = inst
+                for speaker in team.speakers.all():
+                    speaker.institution = inst
+                    speaker.save()
+            except:
+                pass
+            team.save()
+        return Response("Success")
+
+    def generate_word(self,length):
+        alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        res = ''
+        for _ in range(length):
+            res += random.choice(alphabet)
+        return res
